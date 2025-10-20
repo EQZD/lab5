@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Requests</title></head>
+<body>
+<h1>Requests</h1>
+<a href="/requests/add">Add new request</a>
+<table border="1">
+    <tr><th>ID</th><th>User</th><th>Course</th><th>Status</th><th>Actions</th></tr>
+    <tr th:each="r : ${requests}">
+        <td th:text="${r.id}"></td>
+        <td th:text="${r.userName}"></td>
+        <td th:text="${r.course.name}"></td>
+        <td th:text="${r.handled ? 'Processed' : 'Pending'}"></td>
+        <td>
+            <a th:if="${!r.handled}" th:href="@{/requests/{id}/assign(id=${r.id})}">Assign</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

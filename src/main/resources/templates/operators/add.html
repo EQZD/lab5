@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Operator</title>
+</head>
+<body>
+<h2>Add New Operator</h2>
+<form th:action="@{/operators/add}" th:object="${operator}" method="post">
+    <label>Name:</label><br>
+    <input type="text" th:field="*{name}"/><br>
+    <label>Surname:</label><br>
+    <input type="text" th:field="*{surname}"/><br>
+    <label>Department:</label><br>
+    <input type="text" th:field="*{department}"/><br><br>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

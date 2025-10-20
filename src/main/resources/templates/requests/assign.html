@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Assign Operators</title></head>
+<body>
+<h1>Assign Operators</h1>
+<form th:action="@{/requests/{id}/assign(id=${request.id})}" method="post">
+    <table>
+        <tr th:each="op : ${operators}">
+            <td><input type="checkbox" name="operatorIds" th:value="${op.id}"/></td>
+            <td th:text="${op.name + ' ' + op.surname + ' (' + op.department + ')'}"></td>
+        </tr>
+    </table>
+    <button type="submit">Assign</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Request</title>
+</head>
+<body>
+<h2>Create Application Request</h2>
+<form th:action="@{/requests/add}" th:object="${request}" method="post">
+    <label>User name:</label><br>
+    <input type="text" th:field="*{userName}" /><br>
+
+    <label>Commentary:</label><br>
+    <input type="text" th:field="*{commentary}" /><br>
+
+    <label>Phone:</label><br>
+    <input type="text" th:field="*{phone}" /><br>
+
+    <label>Course:</label><br>
+    <select th:field="*{course.id}" required>
+        <option th:each="course : ${courses}"
+                th:value="${course.id}"
+                th:text="${course.name + ' - ' + course.price}"></option>
+    </select>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

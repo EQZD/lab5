@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Operators</title>
+</head>
+<body>
+<h2>Operators List</h2>
+<a href="/operators/add">Add New Operator</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Department</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="operator : ${operators}">
+        <td th:text="${operator.id}"></td>
+        <td th:text="${operator.name}"></td>
+        <td th:text="${operator.surname}"></td>
+        <td th:text="${operator.department}"></td>
+        <td>
+            <a th:href="@{'/operators/delete/' + ${operator.id}}">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
