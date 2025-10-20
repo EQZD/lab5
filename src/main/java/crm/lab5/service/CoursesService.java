@@ -1,6 +1,8 @@
 package crm.lab5.service;
 
+import crm.lab5.entity.ApplicationRequest;
 import crm.lab5.entity.Courses;
+import crm.lab5.repository.ApplicationRequestRepository;
 import crm.lab5.repository.CoursesRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,11 @@ import java.util.List;
 public class CoursesService {
 
     private final CoursesRepository repository;
+    private final ApplicationRequestRepository requestRepository;
 
-    public CoursesService(CoursesRepository repository) {
+    public CoursesService(CoursesRepository repository, ApplicationRequestRepository requestRepository) {
         this.repository = repository;
+        this.requestRepository = requestRepository;
     }
 
     public List<Courses> getAll() {
@@ -28,6 +32,13 @@ public class CoursesService {
     }
 
     public void delete(Long id) {
+        List<ApplicationRequest> requestsToDetach = requestRepository.findAllByCourseId(id);
+
+        for (ApplicationRequest req : requestsToDetach) {
+            req.setCourse(null);
+            requestRepository.save(req);
+        }
+
         repository.deleteById(id);
     }
 }

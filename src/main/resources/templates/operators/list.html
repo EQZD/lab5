@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Operators</title>
+    <title>Список Операторов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h2>Operators List</h2>
-<a href="/operators/add">Add New Operator</a>
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Department</th>
-        <th>Actions</th>
-    </tr>
-    <tr th:each="operator : ${operators}">
-        <td th:text="${operator.id}"></td>
-        <td th:text="${operator.name}"></td>
-        <td th:text="${operator.surname}"></td>
-        <td th:text="${operator.department}"></td>
-        <td>
-            <a th:href="@{'/operators/delete/' + ${operator.id}}">Delete</a>
-        </td>
-    </tr>
-</table>
+<div th:replace="~{layout :: header}"></div>
+<div class="container mt-4">
+    <h2>Список Операторов</h2>
+    <a th:href="@{/operators/add}" class="btn btn-success mb-3">Добавить Оператора</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отдел</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="operator : ${operators}">
+            <td th:text="${operator.id}">1</td>
+            <td th:text="${operator.name}">Иван</td>
+            <td th:text="${operator.surname}">Иванов</td>
+            <td>
+                <a th:href="@{/operators/delete/{id}(id=${operator.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Удалить оператора?');">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

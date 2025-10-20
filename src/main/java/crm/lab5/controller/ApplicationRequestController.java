@@ -58,4 +58,23 @@ public class ApplicationRequestController {
         requestService.save(req);
         return "redirect:/requests";
     }
+
+    @GetMapping("/{requestId}/operator/delete/{operatorId}")
+    public String deleteOperatorFromRequest(@PathVariable Long requestId, @PathVariable Long operatorId) {
+        ApplicationRequest request = requestService.getById(requestId);
+        if (request != null) {
+            request.getOperators().removeIf(operator -> operator.getId().equals(operatorId));
+            if (request.getOperators().isEmpty()) {
+                request.setHandled(false);
+            }
+            requestService.save(request);
+        }
+        return "redirect:/requests/" + requestId + "/assign";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRequest(@PathVariable Long id) {
+        requestService.delete(id);
+        return "redirect:/requests";
+    }
 }

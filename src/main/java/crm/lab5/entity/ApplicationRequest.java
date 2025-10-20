@@ -30,4 +30,10 @@ public class ApplicationRequest {
             inverseJoinColumns = @JoinColumn(name = "operator_id")
     )
     private List<Operators> operators;
+
+    public void removeOperator(Operators operator) {
+        this.operators.remove(operator);
+        operator.getRequests().remove(this);
+    }
 }
+
